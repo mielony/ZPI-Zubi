@@ -25,3 +25,11 @@
 </form>
 
 {% endblock %}
+
+{% block javascript %}
+<script src={{ asset('assets/js/right.js') }} type="text/javascript"></script>
+<script src={{ asset('assets/js/right-calendar.js') }} type="text/javascript"></script>
+<script type="text/javascript">
+new Calendar({format: "%Y-%m-%d", listYears: true}).assignTo('form_data_ur');
+</script>
+{% endblock %}
