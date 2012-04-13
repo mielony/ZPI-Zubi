@@ -36,6 +36,7 @@
                 <tr>
                     <td>Rodzaj pomiaru</td>
                     <td>Wartość pomiaru</td>
+                    <td>Data/czas</td>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +44,7 @@
                     <tr>
                         <td>{{ mt.measurementType.name }}</td>
                         <td>{{ mt.value }}</td>
+                        <td>{{ mt.timestamp.format("Y-m-d H:i:s") }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
