@@ -16,8 +16,11 @@ class DefaultController extends Controller
         if($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $this->get('security.context')->getToken()->getUser();
 
+            
+
             $viewVars['user']       = $user;
-            $viewVars['stations']   = $user->getStations(); 
+            $viewVars['stations']   = $user->getStations();
+        
         }
 
         return $this->render('ZubiIndexBundle:Default:index.html.twig', $viewVars);

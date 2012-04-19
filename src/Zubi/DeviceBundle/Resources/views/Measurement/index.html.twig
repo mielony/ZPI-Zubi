@@ -3,7 +3,9 @@
 {% block sidebartitle %}Pomiary{% endblock %}
 
 {% block sidebaritems %}
-    <li class="active"><a href="{{ path('ZubiDeviceBundle_homepage') }}">Lista pomiarów</a></li>
+    <li><a href="{{ path('ZubiDeviceBundle_homepage') }}">Lista urządzeń</a></li>
+    <li><a href="{{ path('ZubiDeviceBundle_addStation') }}">Dodaj urządzenie</a></li>
+    <li class="active"><a href="{{ path('ZubiDeviceBundle_measurements') }}">Lista pomiarów</a></li>
 {% endblock %}
 
 {% block body %}
@@ -31,6 +33,23 @@
     </div>
     
     <div class="row">
+        {% if paginationStats.pages > 1 %}
+        <div class="pagination">
+          <ul>
+            {% if paginationStats.pages > 1 and paginationStats.currentPage != 0 %}
+                <li><a href="{{ path('ZubiDeviceBundle_measurements', {'stationId': currentStation, 'pageNum': 0}) }}">←</a></li>
+            {% endif %}
+            {% for i in 1..paginationStats.pages %}
+                <li {% if loop.index == paginationStats.currentPage + 1 %} class="active"{% endif %} >
+                    <a href="{{ path('ZubiDeviceBundle_measurements', {'stationId': currentStation, 'pageNum': loop.index-1}) }}">{{ loop.index }}</a>
+                </li>
+            {% endfor %}
+            {% if paginationStats.pages > 1 and paginationStats.currentPage != paginationStats.pages - 1 %}
+                <li><a href="{{ path('ZubiDeviceBundle_measurements', {'stationId': currentStation, 'pageNum': paginationStats.pages-1}) }}">→</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endif %}
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -42,12 +61,30 @@
             <tbody>
                 {% for mt in measurements %}
                     <tr>
-                        <td>{{ mt.measurementType.name }}</td>
-                        <td>{{ mt.value }}</td>
+                        <td>{{ mt.getMeasurementType.name }}</td>
+                        <td>{{ mt.getValue }}</td>
                         <td>{{ mt.timestamp.format("Y-m-d H:i:s") }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        
+        {% if paginationStats.pages > 1 %}
+        <div class="pagination">
+          <ul>
+            {% if paginationStats.pages > 1 and paginationStats.currentPage != 0 %}
+                <li><a href="{{ path('ZubiDeviceBundle_measurements', {'stationId': currentStation, 'pageNum': 0}) }}">←</a></li>
+            {% endif %}
+            {% for i in 1..paginationStats.pages %}
+                <li {% if loop.index == paginationStats.currentPage + 1 %} class="active"{% endif %} >
+                    <a href="{{ path('ZubiDeviceBundle_measurements', {'stationId': currentStation, 'pageNum': loop.index-1}) }}">{{ loop.index }}</a>
+                </li>
+            {% endfor %}
+            {% if paginationStats.pages > 1 and paginationStats.currentPage != paginationStats.pages - 1 %}
+                <li><a href="{{ path('ZubiDeviceBundle_measurements', {'stationId': currentStation, 'pageNum': paginationStats.pages-1}) }}">→</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -21,7 +21,7 @@
             marker[{{ loop.index0 }}] = new google.maps.Marker({
               position: new google.maps.LatLng({{ st.latitude }},{{ st.longitude }}),
               map: map,
-              title: "Siema siema",
+              title: "",
             });
             
             google.maps.event.addListener(marker[{{ loop.index0 }}], 'click', function() {
