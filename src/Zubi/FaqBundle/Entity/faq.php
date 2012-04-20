@@ -109,6 +109,27 @@ class Faq {
         return $this->id_statusu;
     }
     
+    
+    /**
+     * Set id_statusu
+     *
+     * @param integer $idStatusu
+     */
+    public function setid_statusu($idStatusu)
+    {
+        $this->id_statusu = $idStatusu;
+    }
+
+    /**
+     * Get id_statusu
+     *
+     * @return integer 
+     */
+    public function getid_statusu()
+    {
+        return $this->id_statusu;
+    }
+    
   
     /**
      * @var Zubi\FaqBundle\Entity\Status_widocznosci
@@ -124,6 +145,7 @@ class Faq {
     public function setStatusWidocznosci(\Zubi\FaqBundle\Entity\Status_widocznosci $statusWidocznosci)
     {
         $this->status_widocznosci = $statusWidocznosci;
+        $this->id_statusu = $this->status_widocznosci->getId();
     }
 
     /**
