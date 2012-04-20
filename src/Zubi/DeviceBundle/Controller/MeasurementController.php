@@ -33,7 +33,7 @@ class MeasurementController extends Controller {
                     break;
             }
         }
-        $stationId = $currentStation->getId();
+
         $measurementsPerPage = 20;
 
         $dql = "SELECT m FROM ZubiDeviceBundle:Measurement m WHERE m.station = :station ORDER BY m.timestamp DESC";
@@ -46,7 +46,7 @@ class MeasurementController extends Controller {
 
         $viewVars['stations'] = $stations;
         $viewVars['measurements'] = $measurements;
-        $viewVars['currentStation'] = $stationId;
+        $viewVars['currentStation'] = $currentStation;
         $viewVars['paginationStats'] = array('total' => count($measurements), 
                                             'pages' => ceil(count($measurements)/$measurementsPerPage), 
                                             'perPage' => $measurementsPerPage,
