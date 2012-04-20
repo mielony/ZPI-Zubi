@@ -1,11 +1,9 @@
 {% extends  '::base.html.twig' %}
 
-
-
-{% block sidebartitle %} Profil {% endblock %}
+{% block sidebartitle %} Profil użytkownika {% endblock %}
 
 {% block sidebaritems %}
-              <li><a href="{{ path('ZubiUserBundle_homepage') }}">Ty</a></li>  
+              <li><a href="{{ path('ZubiUserBundle_homepage') }}">Dane użytkownika</a></li>  
               <li><a href="{{ path('ZubiUserBundle_private') }}">Ustawienia prywatności</a></li>
               <li><a href="{{ path('ZubiUserBundle_edituser') }}">Edytuj konto</a></li>
               <li class="active"><a href="#">Lista</a></li>
@@ -13,6 +11,8 @@
 {% endblock %}
 
 {% block body %}
+<h3> Lista zarejestrowanych użytkowników</h3>
+<br>
 	<table class="table">
 		<thead>
 			<tr>
