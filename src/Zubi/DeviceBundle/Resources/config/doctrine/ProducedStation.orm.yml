@@ -1,0 +1,19 @@
+Zubi\DeviceBundle\Entity\ProducedStation:
+  type: entity
+  table: Stacje_weryfikacja
+  fields:
+    id:
+      type: integer
+      id: true
+      column: Id
+      generator:
+        strategy: AUTO
+    mac:
+      type: string
+      length: '17'
+      column: Mac
+  lifecycleCallbacks: {  }
+  oneToOne:
+    station:
+      targetEntity: Station
+      mappedBy: producedStation

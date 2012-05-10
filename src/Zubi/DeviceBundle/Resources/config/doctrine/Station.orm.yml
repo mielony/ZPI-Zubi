@@ -7,10 +7,6 @@ Zubi\DeviceBundle\Entity\Station:
       id: true
       generator:
         strategy: AUTO
-    hash:
-      type: string
-      length: 255
-      column: Hash
     version:
       type: string
       length: 255
@@ -44,4 +40,11 @@ Zubi\DeviceBundle\Entity\Station:
       inversedBy: stations
       joinColumn:
         name: Id_Uzytkownika
+        referencedColumnName: id
+  oneToOne:
+    producedStation:
+      targetEntity: ProducedStation
+      inversedBy: station
+      joinColumn:
+        name: Id_Stacji_Zweryfikowanej
         referencedColumnName: id

@@ -52,8 +52,12 @@ class Station
     /**
      * @var Zubi\UserBundle\Entity\User $user;
      */
-
     private $user;
+
+    /**
+     * @var Zubi\DeviceBundle\Entity\ProducedStation $producedStation;
+     */
+    private $producedStation;
 
 
     /**
@@ -307,5 +311,27 @@ class Station
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set producedStation
+     *
+     * @param Zubi\DeviceBundle\Entity\ProducedStation $producedStation
+     * @return Station
+     */
+    public function setProducedStation(\Zubi\DeviceBundle\Entity\ProducedStation $producedStation = null)
+    {
+        $this->producedStation = $producedStation;
+        return $this;
+    }
+
+    /**
+     * Get producedStation
+     *
+     * @return Zubi\DeviceBundle\Entity\ProducedStation 
+     */
+    public function getProducedStation()
+    {
+        return $this->producedStation;
     }
 }
