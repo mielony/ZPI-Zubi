@@ -7,6 +7,15 @@ use Symfony\Component\Validator\ValidatorFactory;
 
 use Zubi\DeviceBundle\Entity\Measurement;
 
+/*****
+ *	Nazwa testu 		Opis testu
+ *  ------------------------------
+ *	testStationId		Test sprawdzający poprawność przypisania id do obiektu
+ *  testTimestamp		Test sprawdzający poprawność przypisywania czasu do obiektu
+ *	testMeasureTypeId	Test sprawdzający poprawność przypisywania rodzaju pomiaru do obiektu
+ *	testValue 			Test sprawdzający poprawność przypisania wartości pomiaru do obiektu
+ *
+ */
 class MeasurementTest extends WebTestCase
 {
 

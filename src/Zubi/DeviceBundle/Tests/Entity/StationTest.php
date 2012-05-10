@@ -6,6 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 use Zubi\DeviceBundle\Entity\Station;
 
+/*****
+ *	Nazwa testu 		Opis testu
+ *  ------------------------------
+ *	testVersion			Test sprawdzający poprawność przypisania wersji stacji do obiektu
+ *  testCountry			Test sprawdzający poprawność przypisywania kodu kraju do obiektu
+ *	testStreet			Test sprawdzający poprawność przypisywania ulicy do obiektu
+ *	testLatitude 		Test sprawdzający poprawność przypisania szerokości geograficznej do obiektu
+ *	testLongitude		Test sprawdzający poprawność przypisania długości geograficznej do obiektu
+ *	testUserId			Test sprawdzający poprawność przypisania id użytkownika do obiektu
+ */
+
 class StationTest extends WebTestCase
 {
 

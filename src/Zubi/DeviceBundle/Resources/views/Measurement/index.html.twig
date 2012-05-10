@@ -20,20 +20,18 @@
             
         });
 
-        google.load('visualization', '1', {packages: ['annotatedtimeline']});
+        google.load('visualization', '1', {packages: ['corechart']});
             function drawVisualization() {
               var data = new google.visualization.DataTable();
-              data.addColumn('datetime', 'Data');
+              data.addColumn('datetime', 'Czas');
               data.addColumn('number', 'Temperatura');
-              data.addColumn('string', 'title1');
-              data.addColumn('string', 'text1');
               data.addRows([
-                    {% for mt in currentStation.measurements %}[new Date( "{{ mt.timestamp.format("r") }}"), {{ mt.value }}, null, null],{% endfor %}
+                    {% for mt in currentStation.measurements %}[new Date( "{{ mt.timestamp.format("r") }}"), {{ mt.value }}],{% endfor %}
               ]);
             
-              var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
+              var chart = new google.visualization.LineChart(
                   document.getElementById('visualization'));
-              annotatedtimeline.draw(data, {'displayAnnotations': true});
+              chart.draw(data, {'pointSize': 2, 'lineWidth': 1});
             }
             
             google.setOnLoadCallback(drawVisualization);

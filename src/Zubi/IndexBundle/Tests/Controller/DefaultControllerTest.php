@@ -5,6 +5,14 @@ namespace Zubi\IndexBundle\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zubi\IndexBundle\Tests\AbstractAdminTestCase;
 
+/*****
+ *  Nazwa testu         Opis testu
+ *  ------------------------------
+ *  testUnloggedIndex   Test sprawdzający poprawność wyświetlenia strony głównej dla niezalogowanego użytkownika
+ *  testLoggedIndex     Test sprawdzający poprawność wyświetlenia strony głównej dla zalogowanego użytkownika
+ *
+ */
+
 class DefaultControllerTest extends AbstractAdminTestCase {
     
     public function testUnloggedIndex() {
