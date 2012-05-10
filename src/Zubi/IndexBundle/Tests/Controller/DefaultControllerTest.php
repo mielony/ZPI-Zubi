@@ -5,6 +5,7 @@ namespace Zubi\IndexBundle\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zubi\IndexBundle\Tests\AbstractAdminTestCase;
 
+
 /*****
  *  Nazwa testu         Opis testu
  *  ------------------------------
@@ -12,6 +13,7 @@ use Zubi\IndexBundle\Tests\AbstractAdminTestCase;
  *  testLoggedIndex     Test sprawdzający poprawność wyświetlenia strony głównej dla zalogowanego użytkownika
  *
  */
+
 
 class DefaultControllerTest extends AbstractAdminTestCase {
     
@@ -32,6 +34,7 @@ class DefaultControllerTest extends AbstractAdminTestCase {
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
 
     }
 }

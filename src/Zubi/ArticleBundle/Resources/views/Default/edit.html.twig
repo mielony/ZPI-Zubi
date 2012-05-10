@@ -1,16 +1,19 @@
+{# podpięcie się pod bazowy szablon strony #}
 {% extends  '::base.html.twig' %}
-
+{# zmiana sidebartitle #}
 {% block sidebartitle %}Edycja Artykułu{% endblock %}
+{# lewe menu #}
 {% block sidebaritems %}
-    <li class="active"><a href="{{ path('ZubiArticleBundle_homepage') }}">Lista artykułów</a></li>
+        <li class="active"><a href="{{ path('ZubiArticleBundle_homepage') }}">Lista artykułów</a></li>
+    {# ten odnośnik dostępny tylko dla ADMINA #}
     {% if is_granted('ROLE_ADMIN') %} 
         <li><a href="{{ path('ZubiArticleBundle_groups') }}">Lista grup art.</a></li>
     {% endif %}  
     <li><a href="{{ path('ZubiIndexBundle_homepage') }}">Strona główna serwisu</a></li>
 {% endblock %}
-
+{# terść strony #}
 {% block body %}
-
+{# pole na komuniaty o sukcesie lub błędach #}
 {% if app.session.hasFlash('notice') %}
     <div class="flash-notice" style="color:blue;">
         {{ app.session.flash('notice') }}
@@ -22,13 +25,39 @@
     </div>
 {% endif %}
 <h4>Edycja artykułu</h4>
-<form action="{{ url('ZubiArticleBundle_edit', { 'id': id })  }}" method="POST" {{ form_enctype(form) }}>
-    {{ form_row(form.author) }}
-    {{ form_row(form.articleGroup) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.content) }}
-    {{ form_row(form.StatusWidocznosci) }}
-    <input type="submit" /> 
-</form>
-<a href="{{ url('ZubiArticleBundle_homepage') }}"> Anuluj - powrót do listy artykułów </a>  
+{# wyśietlenie formularza do edycji artykułu #}
+<form class="form-horizontal" action="{{ url('ZubiArticleBundle_edit', { 'id': id })  }}"   method="POST" {{ form_enctype(form) }}>
+    <fieldset>
+        <legend>Możesz dodać nowy artykuł</legend>
+        <div class="control-group">
+                <label class="control-label" for="input01">Wybierz autora:</label>
+                <div class="controls">{{ form_widget(form.author) }} 
+                    <a class="btn btn-info" href="{{ path('ZubiArticleBundle_author_add', { 'id': id } ) }}"><i class="icon-plus"></i> dodaj autora</a>
+                </div>    
+        </div>
+        <div class="control-group">
+                <label class="control-label" for="input01">Wybierz temat:</label>
+                <div class="controls">{{ form_widget(form.articleGroup) }}
+                    <a class="btn btn-info" href="{{ path('ZubiArticleBundle_group_add') }}"><i class="icon-plus"></i> dodaj gr. teamtyczną</a>
+                </div>    
+        </div>
+        <div class="control-group">
+                <label class="control-label" for="input01">Tytuł artykułu:</label>
+                <div class="controls">{{ form_widget(form.title,  { 'attr': {'class': 'article_title_field'}}) }}</div>    
+        </div>
+        <div class="control-group">
+                <label class="control-label" for="input01">Treść artykułu:</label>
+                <div class="controls">{{ form_widget(form.content,  { 'attr': {'class': 'article_content_field'}}) }}</div>    
+        </div>
+        <div class="control-group">
+                <label class="control-label" for="input01">Widoczność dla:</label>
+                <div class="controls">{{ form_widget(form.StatusWidocznosci) }}</div>    
+        </div>
+
+        <div class="controls">
+                <input class="btn btn-primary" type="submit"  value="Zapisz zmiany" />
+                <a  class="btn btn-danger" href="{{ url('ZubiArticleBundle_homepage') }}"> Anuluj </a>            
+        </div>  
+    </fieldset>
+</form>    
 {% endblock %}
