@@ -4,9 +4,11 @@ namespace Zubi\DeviceBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 
 use Zubi\DeviceBundle\Entity\Measurement;
 use Zubi\DeviceBundle\Entity\Station;
+use Zubi\DeviceBundle\Entity\ProducedStation;
 use Zubi\DeviceBundle\Form\StationType;
 
 class StationController extends Controller
@@ -32,10 +34,27 @@ class StationController extends Controller
 
         if($request->getMethod() == 'POST') {
             $form->bindRequest($request);
+            
+            $producedStationRepository = $this->getDoctrine()->getRepository('ZubiDeviceBundle:ProducedStation');
+            $requestVars = $request->request->get('zubi_devicebundle_stationtype');
+            $producedStation = $producedStationRepository->findByMac($requestVars['hash']);
+
+            if(!$producedStation) 
+                $form->addError(new FormError('Stacja pogodowa o takim identyfikatorze nie istnieje')); 
+            else 
+                if(count($producedStation[0]->getStation()) > 0)
+                    $form->addError(new FormError('Stacja pogodowa o takim identyfikatorze jest już zarejestrowana')); 
+                else {
+                    $station->setProducedStation($producedStation[0]);
+                }
+            
 
             if($form->isValid()) {
+
                 $em = $this->getDoctrine()->getEntityManager();
+                
                 $em->persist($station);
+
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('ZubiDeviceBundle_homepage'));
